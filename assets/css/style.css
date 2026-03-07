@@ -593,6 +593,8 @@ section {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: auto;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .badge-capstone {
@@ -631,13 +633,23 @@ section {
 }
 
 .portfolio-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: max-content;
   padding: 9px 16px;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   color: #fff !important;
   transition: all 0.25s ease;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.portfolio-card-body .portfolio-btn {
+  align-self: flex-start;
 }
 
 .portfolio-btn:hover {
@@ -694,6 +706,8 @@ section {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .creative-media-card:hover {
@@ -730,6 +744,9 @@ section {
 
 .creative-media-body {
   padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .creative-media-body h3 {
@@ -741,22 +758,36 @@ section {
   min-height: 46px;
 }
 
-.creative-media-body p {
+.creative-role {
+  margin-bottom: 8px;
+  color: #149ddd;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.creative-desc {
   margin-bottom: 14px;
   color: #6c757d;
   font-size: 14px;
   line-height: 1.5;
-  min-height: 42px;
+  min-height: 64px;
 }
 
 .creative-media-btn {
-  display: inline-block;
-  padding: 9px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: max-content;
+  padding: 8px 14px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #fff !important;
   transition: all 0.25s ease;
+  white-space: nowrap;
+  margin-top: auto;
 }
 
 .creative-media-btn:hover {
@@ -765,35 +796,24 @@ section {
   transform: translateY(-1px);
 }
 
-/* Badge / button colours */
-.badge-promo,
-.btn-promo {
+/* Consistent badge / button colours */
+.badge-course,
+.btn-course {
   background: #6f42c1;
 }
 
-.badge-project-video,
-.btn-project-video {
+.badge-module,
+.btn-module {
   background: #1f6fd1;
-}
-
-.badge-trailer,
-.btn-trailer {
-  background: #dc3545;
-}
-
-.badge-educational,
-.btn-educational {
-  background: #198754;
-}
-
-.badge-explainer,
-.btn-explainer {
-  background: #fd7e14;
 }
 
 @media (max-width: 991px) {
   .creative-media-image {
     height: 210px;
+  }
+
+  .creative-desc {
+    min-height: 72px;
   }
 }
 
@@ -802,11 +822,8 @@ section {
     height: 220px;
   }
 
-  .creative-media-body h3 {
-    min-height: auto;
-  }
-
-  .creative-media-body p {
+  .creative-media-body h3,
+  .creative-desc {
     min-height: auto;
   }
 }
