@@ -486,56 +486,7 @@ section {
   border: 2px solid #1f5297;
 }
 
-.resume-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
 
-.resume-section-header {
-  padding-bottom: 20px;
-}
-
-.resume-section-header h2 {
-  margin-bottom: 0;
-}
-
-.resume-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #149ddd;
-  color: #fff !important;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.resume-download-btn:hover {
-  background: #1f6fd1;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.resume-download-btn i {
-  font-size: 18px;
-}
-
-@media (max-width: 767px) {
-  .resume-title-row {
-    align-items: flex-start;
-  }
-
-  .resume-download-btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
 
 /*--------------------------------------------------------------
 # Portfolio
