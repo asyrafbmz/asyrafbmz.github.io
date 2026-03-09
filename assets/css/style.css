@@ -556,6 +556,53 @@ section {
   display: block;
 }
 
+.portfolio-card-cover {
+  display: flex;
+  align-items: flex-end;
+  padding: 22px;
+  color: #fff;
+}
+
+.portfolio-card-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 11, 20, 0.08) 0%, rgba(4, 11, 20, 0.5) 100%);
+}
+
+.portfolio-card-cover-cristofori {
+  background: linear-gradient(135deg, #173b6c 0%, #149ddd 100%);
+}
+
+.portfolio-cover-content {
+  position: relative;
+  z-index: 1;
+  max-width: 90%;
+}
+
+.portfolio-cover-content i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.portfolio-cover-content span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.portfolio-cover-content h4 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #fff;
+}
+
 .portfolio-badge {
   position: absolute;
   top: 12px;
