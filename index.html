@@ -27,34 +27,58 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- Energy Innovation Challenge portfolio gallery -->
+  <!-- Portfolio image carousels -->
   <style>
-	.portfolio-card-image.eic-gallery {
+	.portfolio-card-image.portfolio-gallery {
 	  overflow: hidden;
 	  background: #0b1f33;
 	}
 
-	.eic-gallery .carousel,
-	.eic-gallery .carousel-inner,
-	.eic-gallery .carousel-item {
+	.portfolio-gallery .carousel,
+	.portfolio-gallery .carousel-inner,
+	.portfolio-gallery .carousel-item {
 	  height: 100%;
 	}
 
-	.eic-gallery .carousel-item img {
+	.portfolio-gallery .carousel-item img {
 	  width: 100%;
 	  height: 100%;
 	  object-fit: cover;
 	  object-position: center;
 	}
 
-	.eic-gallery .carousel-control-prev,
-	.eic-gallery .carousel-control-next {
+	.portfolio-gallery .portfolio-logo-slide,
+	.portfolio-gallery .portfolio-logo-slide img {
+	  background: #fff;
+	}
+
+	.portfolio-gallery .portfolio-logo-slide img {
+	  object-fit: contain;
+	  padding: 18px;
+	}
+
+	.portfolio-gallery .portfolio-contain-slide img {
+	  object-fit: contain;
+	}
+
+	.portfolio-gallery .portfolio-dark-slide,
+	.portfolio-gallery .portfolio-dark-slide img {
+	  background: #171717;
+	}
+
+	.portfolio-gallery .portfolio-light-slide,
+	.portfolio-gallery .portfolio-light-slide img {
+	  background: #fff;
+	}
+
+	.portfolio-gallery .carousel-control-prev,
+	.portfolio-gallery .carousel-control-next {
 	  width: 13%;
 	  opacity: 0.9;
 	}
 
-	.eic-gallery .carousel-control-prev-icon,
-	.eic-gallery .carousel-control-next-icon {
+	.portfolio-gallery .carousel-control-prev-icon,
+	.portfolio-gallery .carousel-control-next-icon {
 	  width: 26px;
 	  height: 26px;
 	  padding: 18px;
@@ -63,7 +87,7 @@
 	  background-size: 45% 45%;
 	}
 
-	.eic-photo-credit {
+	.portfolio-image-caption {
 	  position: absolute;
 	  right: 10px;
 	  bottom: 8px;
@@ -692,39 +716,36 @@
 		  <!-- Energy Innovation Challenge 2017 -->
 		  <div class="col-lg-4 col-md-6 portfolio-item filter-project filter-achievement filter-media">
 			<div class="portfolio-card">
-			  <div class="portfolio-card-image eic-gallery">
-				<div id="eicCarousel" class="carousel slide"
-					 data-ride="carousel"
-					 data-interval="5000"
-					 data-pause="hover">
-					  <div class="carousel-inner">
-						<div class="carousel-item active">
-						  <img src="assets/img/portfolio/eic/EIC.jpg" class="d-block w-100" alt="Energy Innovation Challenge 2017 champions with Dr Vivian Balakrishnan">
-						</div>
-						<div class="carousel-item">
-						  <img src="assets/img/portfolio/eic/eic2.webp" class="d-block w-100" alt="ITE College West team developing the Roadmaster prototype">
-						  <span class="eic-photo-credit">Photo: Berita Harian / SPH Media</span>
-						</div>
-						<div class="carousel-item">
-						  <img src="assets/img/portfolio/eic/eic1.webp" class="d-block w-100" alt="Roadmaster team members featured by Berita Harian">
-						  <span class="eic-photo-credit">Photo: Berita Harian / SPH Media</span>
-						</div>
-						<div class="carousel-item">
-						  <img src="assets/img/portfolio/eic/ria1.jpg" class="d-block w-100" alt="Roadmaster team being interviewed in the Ria 89.7 FM studio">
-						</div>
-						<div class="carousel-item">
-						  <img src="assets/img/portfolio/eic/ria2.jpg" class="d-block w-100" alt="Roadmaster team and presenters at Ria 89.7 FM">
-						</div>
-					  </div>
+			  <div class="portfolio-card-image portfolio-gallery eic-gallery">
+				<div id="eicCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover">
+				  <div class="carousel-inner">
+					<div class="carousel-item active">
+					  <img src="assets/img/portfolio/eic/EIC.jpg" class="d-block w-100" alt="Energy Innovation Challenge 2017 champions with Dr Vivian Balakrishnan">
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/eic/eic2.webp" class="d-block w-100" alt="ITE College West team developing the Roadmaster prototype">
+					  <span class="portfolio-image-caption">Photo: Berita Harian / SPH Media</span>
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/eic/eic1.webp" class="d-block w-100" alt="Roadmaster team members featured by Berita Harian">
+					  <span class="portfolio-image-caption">Photo: Berita Harian / SPH Media</span>
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/eic/ria1.jpg" class="d-block w-100" alt="Roadmaster team being interviewed in the Ria 89.7 FM studio">
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/eic/ria2.jpg" class="d-block w-100" alt="Roadmaster team and presenters at Ria 89.7 FM">
+					</div>
+				  </div>
 
-					  <a class="carousel-control-prev" href="#eicCarousel" role="button" data-slide="prev" aria-label="Previous Energy Innovation Challenge photo">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					  </a>
-					  <a class="carousel-control-next" href="#eicCarousel" role="button" data-slide="next" aria-label="Next Energy Innovation Challenge photo">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					  </a>
+				  <a class="carousel-control-prev" href="#eicCarousel" role="button" data-slide="prev" aria-label="Previous Energy Innovation Challenge photo">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#eicCarousel" role="button" data-slide="next" aria-label="Next Energy Innovation Challenge photo">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
 				</div>
 				<span class="portfolio-badge badge-article">ACHIEVEMENT</span>
 			  </div>
@@ -742,8 +763,34 @@
 		  <!-- ElectroLiTE -->
 		  <div class="col-lg-4 col-md-6 portfolio-item filter-project filter-achievement filter-media">
 			<div class="portfolio-card">
-			  <div class="portfolio-card-image">
-				<img src="assets/img/portfolio/ele.jpg" class="img-fluid" alt="ElectroLiTE | Shell Eco-marathon">
+			  <div class="portfolio-card-image portfolio-gallery electrolite-gallery">
+				<div id="electroliteCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover">
+				  <div class="carousel-inner">
+					<div class="carousel-item active">
+					  <img src="assets/img/portfolio/ele.jpg" class="d-block w-100" alt="ElectroLiTE team at Shell Eco-marathon Asia 2018">
+					  <span class="portfolio-image-caption">Shell Eco-marathon Asia 2018</span>
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/ElectroLite2017.jpg" class="d-block w-100" alt="ElectroLiTE team at Shell Eco-marathon Asia 2017">
+					  <span class="portfolio-image-caption">Shell Eco-marathon Asia 2017</span>
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/electrolitewrap.jpg" class="d-block w-100" alt="ElectroLiTE vehicle wrap and exterior design">
+					</div>
+					<div class="carousel-item portfolio-logo-slide">
+					  <img src="assets/img/portfolio/electrolitelogo.jpg" class="d-block w-100" alt="ElectroLiTE team logo">
+					</div>
+				  </div>
+
+				  <a class="carousel-control-prev" href="#electroliteCarousel" role="button" data-slide="prev" aria-label="Previous ElectroLiTE photo">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#electroliteCarousel" role="button" data-slide="next" aria-label="Next ElectroLiTE photo">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+				</div>
 				<span class="portfolio-badge badge-project">PROJECT</span>
 			  </div>
 			  <div class="portfolio-card-body">
@@ -760,8 +807,35 @@
 		  <!-- EcoRoad -->
 		  <div class="col-lg-4 col-md-6 portfolio-item filter-project filter-achievement filter-media">
 			<div class="portfolio-card">
-			  <div class="portfolio-card-image">
-				<img src="assets/img/portfolio/yac.jpg" class="img-fluid" alt="EcoRoad | Youth Action Challenge">
+			  <div class="portfolio-card-image portfolio-gallery yac-gallery">
+				<div id="yacCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="hover">
+				  <div class="carousel-inner">
+					<div class="carousel-item active">
+					  <img src="assets/img/portfolio/yac.jpg" class="d-block w-100" alt="Youth Action Challenge event artwork">
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/yacsummit.jpg" class="d-block w-100" alt="EcoRoad Youth Action Challenge finalists pitch">
+					</div>
+					<div class="carousel-item">
+					  <img src="assets/img/portfolio/TeamPic.png" class="d-block w-100" alt="EcoRoad team members">
+					</div>
+					<div class="carousel-item portfolio-contain-slide portfolio-dark-slide">
+					  <img src="assets/img/portfolio/UNDParticle.png" class="d-block w-100" alt="EcoRoad recognised as the Most Innovative Solution by UNDP">
+					</div>
+					<div class="carousel-item portfolio-contain-slide portfolio-light-slide">
+					  <img src="assets/img/portfolio/co-lab.png" class="d-block w-100" alt="Youth Co:Lab article featuring the Youth Action Challenge">
+					</div>
+				  </div>
+
+				  <a class="carousel-control-prev" href="#yacCarousel" role="button" data-slide="prev" aria-label="Previous Youth Action Challenge photo">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#yacCarousel" role="button" data-slide="next" aria-label="Next Youth Action Challenge photo">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+				</div>
 				<span class="portfolio-badge badge-project">PROJECT</span>
 			  </div>
 			  <div class="portfolio-card-body">
