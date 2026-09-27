@@ -1514,3 +1514,22 @@ section {
     width: 100%;
 	font-size: 50px;
 }
+
+/*--------------------------------------------------------------
+# JARVIS project card — scoped to preserve the existing portfolio
+--------------------------------------------------------------*/
+.portfolio-card-jarvis { border: 1px solid #dde5ed; }
+.portfolio-card-jarvis .jarvis-project-cover { display: block; background: #06101c; color: white; text-decoration: none; }
+.portfolio-card-jarvis .jarvis-project-cover img { width: 100%; height: 100%; object-fit: cover; object-position: 44% 46%; }
+.jarvis-project-cover:after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(4,12,22,.95)); pointer-events: none; }
+.jarvis-project-cover .portfolio-badge { z-index: 2; }
+.jarvis-cover-label { position: absolute; bottom: 20px; left: 21px; z-index: 2; color: white; font: 650 28px/1 "Segoe UI", Arial, sans-serif; letter-spacing: -1px; }
+.jarvis-cover-label > span { display: block; margin-top: 8px; font-size: 8px; line-height: 1.4; letter-spacing: 1.7px; font-weight: 500; color: #c6d9e9; }
+.portfolio-card-jarvis .portfolio-btn { gap: 14px; }
+.portfolio-card-jarvis .jarvis-setup-link { display: inline-flex; align-items: center; min-height: 42px; padding: 7px 0; color: #245d98; font-size: 13px; font-weight: 600; text-decoration: none; }
+.portfolio-card-jarvis .jarvis-setup-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.portfolio-card-jarvis a:focus-visible { outline: 3px solid #2786dc; outline-offset: -3px; }
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-card-jarvis, .portfolio-card-jarvis .portfolio-btn { transition: none; }
+  .portfolio-card-jarvis:hover, .portfolio-card-jarvis .portfolio-btn:hover { transform: none; }
+}

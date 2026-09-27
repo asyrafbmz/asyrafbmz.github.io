@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JARVIS is Mohamad Asyraf’s personal desktop interface project, built around Google Antigravity running through PowerShell. Explore the file workspace, CAD previews, AI assistant and setup guide.">
+  <meta name="theme-color" content="#10273d">
+  <title>JARVIS — AI Desktop Workspace | Mohamad Asyraf</title>
+  <style>
+    :root {
+      --ink: #132b40;
+      --muted: #536575;
+      --blue: #176ac6;
+      --line: #dbe3eb;
+      --paper: #f6f8fb;
+      --navy: #10273d;
+      --cyan: #7ad4ec;
+      --white: #fff;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--ink);
+      font-family: Inter,"Segoe UI",Arial,sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: var(--blue);
+      text-underline-offset: 4px;
+    }
+    a:hover {
+      color: #0e4d94;
+    }
+    button {
+      font: inherit;
+    }
+    a, button, summary {
+      -webkit-tap-highlight-color: transparent;
+    }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid #2585e2;
+      outline-offset: 5px;
+    }
+    h1, h2, h3, p, figure {
+      margin: 0;
+    }
+    h1, h2, h3 {
+      line-height: 1.16;
+    }
+    h2 {
+      font-size: clamp(28px,3vw,38px);
+      letter-spacing: -1.2px;
+      font-weight: 650;
+    }
+    h3 {
+      font-size: 20px;
+      letter-spacing: -.4px;
+    }
+    p {
+      color: var(--muted);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: auto;
+      padding-inline: 40px;
+    }
+    .skip {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 100;
+      transform: translateY(-160%);
+      background: white;
+      padding: 10px 18px;
+    }
+    .skip:focus {
+      transform: none;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      background: var(--navy);
+      color: white;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .header-nav a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+    .header-nav a:hover, .header-nav a[aria-current] {
+      color: var(--blue);
+    }
+    .header-nav .back {
+      padding-left: 27px;
+      border-left: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .eyebrow:before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+    }
+    .hero {
+      padding: 65px 0 52px;
+      background: linear-gradient(180deg,#f7f9fc,#fff);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: center;
+    }
+    .hero h1 {
+      margin: 22px 0 8px;
+      font-size: clamp(62px,7.7vw,104px);
+      letter-spacing: -6px;
+      font-weight: 700;
+    }
+    .hero-subtitle {
+      display: block;
+      font-size: clamp(23px,2.5vw,31px);
+      font-weight: 500;
+      letter-spacing: -.8px;
+      color: var(--ink);
+    }
+    .hero-desc {
+      max-width: 475px;
+      margin-top: 23px;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 46px;
+      padding: 11px 19px;
+      border: 1px solid var(--blue);
+      border-radius: 5px;
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .button:hover {
+      background: #1055a3;
+      color: white;
+    }
+    .text-link {
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .arrow {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.25fr;
+      gap: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 26px;
+      margin-top: 48px;
+    }
+    .meta-strip dt {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .meta-strip dd {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+    }
+    .section {
+      padding: 72px 0;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: start;
+      margin-bottom: 38px;
+    }
+    .section-head .eyebrow {
+      margin-bottom: 18px;
+    }
+    .section-head>p {
+      padding-top: 32px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .setup-section {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+    .setup-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 65px;
+      align-items: start;
+    }
+    .setup-aside {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 24px;
+    }
+    .setup-aside h3 {
+      font-size: 16px;
+    }
+    .requirements {
+      padding-left: 18px;
+      margin: 17px 0 23px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .requirements li {
+      padding: 4px 0;
+    }
+    .setup-aside .text-link {
+      font-size: 12px;
+    }
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: steps;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 17px;
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 28px;
+      margin-bottom: 28px;
+      counter-increment: steps;
+    }
+    .step:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .step:before {
+      content: counter(steps,decimal-leading-zero);
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-family: Consolas,monospace;
+      border: 1px solid #c9d7e3;
+      background: white;
+      border-radius: 50%;
+      color: var(--blue);
+    }
+    .step h3 {
+      font-size: 18px;
+      padding-top: 5px;
+      margin-bottom: 10px;
+    }
+    .step p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .step p+p {
+      margin-top: 10px;
+    }
+    code {
+      font-family: Consolas,"Courier New",monospace;
+      font-size: .91em;
+      background: #e7edf4;
+      border-radius: 3px;
+      padding: 2px 5px;
+      overflow-wrap: anywhere;
+      color: #214766;
+    }
+    .command {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border: 1px solid #c7d7e6;
+      background: #fff;
+      border-radius: 5px;
+      padding: 10px 11px 10px 17px;
+      margin: 15px 0 10px;
+    }
+    .command code {
+      background: none;
+      padding: 0;
+      color: var(--ink);
+      font-size: 15px;
+    }
+    .command code span {
+      color: #667e92;
+      margin-right: 9px;
+    }
+    .copy-button {
+      font-size: 11px;
+      border: 1px solid #d4e0e9;
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 8px 13px;
+      cursor: pointer;
+      min-width: 64px;
+      min-height: 36px;
+    }
+    .copy-button:hover {
+      background: #e7eff8;
+    }
+    .copy-status {
+      font-size: 12px;
+      min-height: 20px;
+      color: var(--muted);
+      margin-top: -2px;
+    }
+    .source-link {
+      font-size: 12px;
+    }
+    .optional-tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 650;
+      background: #e6edf4;
+      padding: 4px 6px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-left: 8px;
+      color: #42617c;
+    }
+    .support-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 65px;
+    }
+    .support-heading .eyebrow {
+      margin-bottom: 17px;
+    }
+    .support-heading p {
+      font-size: 14px;
+      margin-top: 18px;
+    }
+    .support-list {
+      border-top: 1px solid var(--line);
+    }
+    details {
+      border-bottom: 1px solid var(--line);
+    }
+    summary {
+      padding: 20px 30px 20px 0;
+      position: relative;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      list-style: none;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary:after {
+      content: "+";
+      position: absolute;
+      right: 2px;
+      font-size: 20px;
+      font-weight: 400;
+      top: 15px;
+      color: var(--blue);
+    }
+    details[open] summary:after {
+      content: "−";
+    }
+    details p {
+      font-size: 14px;
+      line-height: 1.8;
+      padding-bottom: 21px;
+    }
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 35px;
+      background: var(--paper);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+    .footer strong {
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .footer p {
+      font-size: 11px;
+      margin-top: 4px;
+    }
+    .footer a {
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    @media (min-width:1000px) {
+      .setup-aside {
+        position: sticky;
+        top: 105px;
+      }
+    }
+    @media (max-width:900px) {
+      .wrap {
+        padding-inline: 28px;
+      }
+      .hero-grid {
+        gap: 32px;
+      }
+      .hero h1 {
+        letter-spacing: -4px;
+      }
+      .section-head {
+        gap: 32px;
+      }
+      .setup-layout, .support-layout {
+        grid-template-columns: 220px 1fr;
+        gap: 32px;
+      }
+      .header-nav {
+        gap: 20px;
+      }
+      .header-nav .back {
+        padding-left: 20px;
+      }
+    }
+    @media (max-width:680px) {
+      html {
+        scroll-padding-top: 88px;
+      }
+      .wrap {
+        padding-inline: 22px;
+      }
+      .header-inner {
+        min-height: 68px;
+        gap: 16px;
+      }
+      .brand {
+        font-size: 12px;
+        gap: 9px;
+      }
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        font-size: 10px;
+      }
+      .header-nav .desktop-link {
+        display: none;
+      }
+      .header-nav .back {
+        border: 0;
+        padding: 0;
+        font-size: 12px;
+      }
+      .hero {
+        padding: 38px 0 30px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero h1 {
+        font-size: 72px;
+        letter-spacing: -4px;
+        margin-top: 18px;
+      }
+      .hero-subtitle {
+        font-size: 25px;
+      }
+      .hero-desc {
+        font-size: 16px;
+        margin-top: 17px;
+      }
+      .actions {
+        margin-top: 24px;
+      }
+      .hero-note {
+        margin-top: 18px;
+      }
+      .meta-strip {
+        gap: 20px 16px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 30px;
+        padding-top: 23px;
+      }
+      .meta-strip>div:last-child {
+        grid-column: 1/-1;
+      }
+      .meta-strip dd {
+        font-size: 12px;
+      }
+      .section {
+        padding: 46px 0;
+      }
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+      .section-head>p {
+        padding: 0;
+        font-size: 14px;
+      }
+      .section-head .eyebrow {
+        margin-bottom: 13px;
+      }
+      .setup-layout, .support-layout {
+        grid-template-columns: 1fr;
+        gap: 29px;
+      }
+      .setup-aside {
+        padding: 22px;
+      }
+      .requirements {
+        margin: 12px 0;
+      }
+      .step {
+        gap: 12px;
+        grid-template-columns: 30px 1fr;
+      }
+      .step h3 {
+        font-size: 17px;
+      }
+      .step:before {
+        width: 29px;
+        height: 29px;
+      }
+      .step p {
+        font-size: 13px;
+      }
+      .optional-tag {
+        display: inline-block;
+        margin-left: 4px;
+      }
+      .support-heading p {
+        margin-top: 13px;
+      }
+      .footer-inner {
+        align-items: flex-start;
+      }
+      .footer a {
+        white-space: nowrap;
+      }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      * {
+        transition: none !important;
+      }
+    }
+    @media print {
+      .site-header, .actions, .copy-button, .footer a {
+        display: none;
+      }
+      .section, .hero {
+        padding: 22px 0;
+      }
+      .setup-aside {
+        position: static;
+      }
+      .wrap {
+        padding-inline: 0;
+      }
+      .section-head, .setup-layout, .support-layout {
+        gap: 25px;
+      }
+      details p {
+        display: block !important;
+      }
+      .step, details {
+        break-inside: avoid;
+      }
+    }
+    .computer-access-note {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-bottom: 19px;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+    .computer-access-note strong {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .wrap {
+      max-width: 1220px;
+      padding-inline: 42px;
+    }
+    .hero {
+      padding: 54px 0 0;
+    }
+    .hero-grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 76px;
+      align-items: end;
+      margin-bottom: 37px;
+    }
+    .hero h1 {
+      font-size: clamp(64px, 7.4vw, 96px);
+      letter-spacing: -5px;
+      margin: 16px 0 10px;
+    }
+    .hero-subtitle {
+      font-size: clamp(24px, 2.5vw, 32px);
+      line-height: 1.22;
+      font-weight: 450;
+    }
+    .hero-desc {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .hero-note {
+      margin-top: 16px;
+      font-size: 11px;
+    }
+    .actions {
+      margin-top: 24px;
+    }
+    .showcase {
+      border: 1px solid #263b4e;
+      border-radius: 9px;
+      background: #060e19;
+      overflow: hidden;
+      box-shadow: 0 24px 55px -37px #10273d70;
+    }
+    .showcase-bar {
+      min-height: 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 20px;
+      background: #101e2c;
+      border-bottom: 1px solid #2d4051;
+      color: #bdccda;
+      font: 10px/1.4 Consolas, monospace;
+      letter-spacing: 1px;
+    }
+    .showcase-bar strong {
+      color: #ecf5fb;
+      font-weight: 500;
+    }
+    .showcase-bar span:last-child {
+      color: #7ddce7;
+      font-size: 9px;
+    }
+    .screenshot-link {
+      display: block;
+      background: #060e19;
+    }
+    .screenshot-link:focus-visible {
+      outline-offset: -4px;
+    }
+    .screenshot-viewport {
+      aspect-ratio: 1919 / 1031;
+      overflow: hidden;
+    }
+    .screenshot-viewport img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .screenshot-caption {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 17px 20px;
+      border-top: 1px solid #253b4d;
+      background: #101e2c;
+    }
+    .screenshot-caption p {
+      font-size: 12px;
+      color: #bbcbd9;
+    }
+    .screenshot-caption strong {
+      color: #f4f8fc;
+      font-weight: 550;
+    }
+    .screenshot-caption a {
+      color: #bcecf2;
+      text-decoration: none;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .gallery-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .gallery-control {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 16px;
+      text-align: left;
+      min-height: 66px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: white;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .gallery-control[aria-pressed="true"] {
+      background: #edf4fb;
+      border-color: #709ec9;
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px #709ec9;
+    }
+    .gallery-control:hover {
+      border-color: #709ec9;
+    }
+    .gallery-control .number {
+      font: 11px Consolas, monospace;
+      color: var(--blue);
+    }
+    .gallery-control strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .gallery-control small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+    .meta-strip {
+      margin: 0;
+      padding: 31px 0 35px;
+      border-top: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .meta-strip dd {
+      font-size: 12px;
+    }
+    .meta-strip dt {
+      font-size: 9px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 27px;
+    }
+    .feature {
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+    .feature svg {
+      display: block;
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 1.4;
+      margin-bottom: 20px;
+    }
+    .feature h3 {
+      font-size: 17px;
+      margin-bottom: 11px;
+    }
+    .feature p {
+      font-size: 13px;
+      line-height: 1.85;
+    }
+    .ownership {
+      margin-top: 37px;
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 30px;
+      padding: 24px 27px;
+      border-left: 3px solid #598fbf;
+      background: var(--paper);
+    }
+    .ownership h3 {
+      font-size: 14px;
+      padding-top: 4px;
+    }
+    .ownership p {
+      font-size: 13px;
+      line-height: 1.85;
+    }
+    .setup-aside .button {
+      width: 100%;
+      gap: 12px;
+    }
+    .download-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 9px 0 22px;
+    }
+    @media (max-width: 950px) {
+      .wrap {
+        padding-inline: 28px;
+      }
+      .hero-grid {
+        gap: 36px;
+      }
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 29px;
+      }
+      .gallery-control {
+        padding: 11px 13px;
+        gap: 9px;
+      }
+    }
+    @media (max-width: 680px) {
+      .wrap {
+        padding-inline: 20px;
+      }
+      .hero {
+        padding-top: 35px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-bottom: 26px;
+      }
+      .hero h1 {
+        font-size: 68px;
+        letter-spacing: -3.5px;
+        margin: 12px 0 9px;
+      }
+      .hero-subtitle {
+        font-size: 27px;
+      }
+      .hero-desc {
+        font-size: 14px;
+      }
+      .actions {
+        margin-top: 20px;
+        gap: 21px;
+      }
+      .hero-note {
+        font-size: 10px;
+        margin-top: 12px;
+      }
+      .showcase {
+        border-radius: 6px;
+      }
+      .showcase-bar {
+        min-height: 34px;
+        padding: 10px 12px;
+        font-size: 8px;
+      }
+      .showcase-bar span:last-child {
+        font-size: 8px;
+      }
+      .screenshot-caption {
+        padding: 13px;
+        display: block;
+      }
+      .screenshot-caption p {
+        font-size: 11px;
+        line-height: 1.65;
+      }
+      .screenshot-caption a {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 10px;
+        min-height: 28px;
+      }
+      .gallery-controls {
+        gap: 7px;
+        margin-top: 11px;
+      }
+      .gallery-control {
+        display: block;
+        padding: 11px 9px;
+        min-height: 79px;
+      }
+      .gallery-control .number {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 10px;
+      }
+      .gallery-control strong {
+        font-size: 10px;
+        line-height: 1.35;
+      }
+      .gallery-control small {
+        display: none;
+      }
+      .meta-strip {
+        gap: 17px;
+        padding: 24px 0 27px;
+      }
+      .meta-strip dd {
+        font-size: 11px;
+      }
+      .meta-strip dt {
+        font-size: 8px;
+      }
+      .feature-grid {
+        gap: 25px 20px;
+      }
+      .feature {
+        padding-top: 18px;
+      }
+      .feature svg {
+        margin-bottom: 13px;
+      }
+      .feature h3 {
+        font-size: 16px;
+        margin-bottom: 9px;
+      }
+      .feature p {
+        font-size: 12px;
+      }
+      .ownership {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 19px 20px;
+        margin-top: 27px;
+      }
+      .ownership h3 {
+        padding: 0;
+      }
+      .ownership p {
+        font-size: 12px;
+      }
+    }
+    @media (max-width: 360px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 62px;
+      }
+      .footer-inner {
+        display: block;
+      }
+      .footer a {
+        display: inline-block;
+        margin-top: 13px;
+      }
+    }
+    @media print {
+      .gallery-controls, .screenshot-caption a {
+        display: none !important;
+      }
+      .showcase {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .hero {
+        padding-top: 20px;
+      }
+    }
+
+    .screenshot-dialog { width: min(96vw, 1760px); max-width: none; max-height: 96vh; padding: 0; border: 1px solid #526a80; border-radius: 8px; background: #07111d; color: white; }
+    .screenshot-dialog::backdrop { background: rgba(2, 10, 18, .88); }
+    .dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 10px 14px 10px 20px; }
+    .dialog-header h2 { font-size: 14px; letter-spacing: 0; font-weight: 550; }
+    .dialog-close { min-width: 44px; min-height: 44px; border: 1px solid #526a80; border-radius: 5px; color: white; background: #10273d; cursor: pointer; font-size: 20px; }
+    .screenshot-dialog img { display: block; max-width: 100%; max-height: calc(96vh - 70px); width: auto; height: auto; margin: auto; object-fit: contain; }
+    body.lightbox-open { overflow: hidden; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">MA</span>Mohamad Asyraf</a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a class="desktop-link" href="#overview">The project</a>
+        <a class="desktop-link" href="#setup">Setup guide</a>
+        <a class="back" href="index.html#portfolio">Portfolio <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="hero" aria-labelledby="project-title">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Personal project / Windows desktop</p>
+            <h1 id="project-title">JARVIS</h1>
+            <p class="hero-subtitle">AI that works<br>with your computer.</p>
+          </div>
+          <div class="hero-copy">
+            <p class="hero-desc">I built a JARVIS-inspired desktop workspace around Google Antigravity running through PowerShell. The assistant can create and edit local files, run commands and carry out tasks on my computer, alongside CAD and document previews.</p>
+            <div class="actions">
+              <a class="button" href="assets/JARVIS_Installation_Package.zip" download>Download JARVIS <span class="arrow" aria-hidden="true">↓</span></a>
+              <a class="text-link" href="#setup">Setup guide <span aria-hidden="true">↗</span></a>
+            </div>
+            <p class="hero-note">Windows application · ZIP package · Antigravity sign-in required for AI</p>
+          </div>
+        </div>
+        <div class="showcase" id="screenshots" aria-label="JARVIS application screenshots">
+          <div class="showcase-bar"><strong>JARVIS / DESKTOP WORKSPACE</strong><span>IN THE APPLICATION</span></div>
+          <figure id="view-ai" class="gallery-panel">
+            <a class="screenshot-link" href="assets/img/jarvis/jarvis-ai-widgets.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size ai screenshot">
+              <div class="screenshot-viewport"><img src="assets/img/jarvis/jarvis-ai-widgets.png" width="1919" height="1078" fetchpriority="high" alt="JARVIS desktop workspace with AI chat on the right and a Class 95 radio widget opened on the left."></div>
+            </a>
+            <figcaption class="screenshot-caption"><p><strong>AI &amp; desktop widgets.</strong> A request in the assistant opens a radio player within the workspace.</p><a href="assets/img/jarvis/jarvis-ai-widgets.png" target="_blank" rel="noopener noreferrer">View full size <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+          <figure id="view-cad" class="gallery-panel">
+            <a class="screenshot-link" href="assets/img/jarvis/jarvis-cad-viewer.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size cad screenshot">
+              <div class="screenshot-viewport"><img src="assets/img/jarvis/jarvis-cad-viewer.png" width="1919" height="1079" loading="lazy" alt="A Raspberry Pi 4 bracket displayed as an STL model in JARVIS, alongside its file explorer and AI assistant."></div>
+            </a>
+            <figcaption class="screenshot-caption"><p><strong>3D model viewer.</strong> An STL preview with model information, view controls and the assistant alongside.</p><a href="assets/img/jarvis/jarvis-cad-viewer.png" target="_blank" rel="noopener noreferrer">View full size <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+          <figure id="view-workspace" class="gallery-panel">
+            <a class="screenshot-link" href="assets/img/jarvis/jarvis-workspace.png" target="_blank" rel="noopener noreferrer" aria-label="Open full-size workspace screenshot">
+              <div class="screenshot-viewport"><img src="assets/img/jarvis/jarvis-workspace.png" width="1919" height="1079" loading="lazy" alt="JARVIS welcome view with a local file explorer on the left, a central workspace and the Antigravity assistant on the right."></div>
+            </a>
+            <figcaption class="screenshot-caption"><p><strong>File workspace.</strong> Local folders, workspace controls and the AI assistant share the same interface.</p><a href="assets/img/jarvis/jarvis-workspace.png" target="_blank" rel="noopener noreferrer">View full size <span aria-hidden="true">↗</span></a></figcaption>
+          </figure>
+        </div>
+        <div class="gallery-controls" id="gallery-controls" role="group" aria-label="Choose an application screenshot" hidden>
+          <button class="gallery-control" type="button" aria-pressed="true" aria-controls="view-ai"><span class="number" aria-hidden="true">01</span><span><strong>AI &amp; widgets</strong><small>Assistant and radio player</small></span></button>
+          <button class="gallery-control" type="button" aria-pressed="false" aria-controls="view-cad"><span class="number" aria-hidden="true">02</span><span><strong>3D model viewer</strong><small>CAD previews in context</small></span></button>
+          <button class="gallery-control" type="button" aria-pressed="false" aria-controls="view-workspace"><span class="number" aria-hidden="true">03</span><span><strong>File workspace</strong><small>Files and assistant together</small></span></button>
+        </div>
+        <dl class="meta-strip">
+          <div><dt>Project type</dt><dd>Personal desktop application</dd></div>
+          <div><dt>My focus</dt><dd>Interface &amp; workflow integration</dd></div>
+          <div><dt>Built around</dt><dd>Google Antigravity · PowerShell · Node.js</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="overview" class="section" aria-labelledby="overview-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">01 / The project</p><h2 id="overview-title">Built around the way<br>I use my desktop.</h2></div>
+          <p>I wanted a JARVIS-style environment that I could actually use for my projects. It brings an AI assistant with access to my computer together with a file workspace, model previews and a terminal.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 3h9v11H3zM3 6V4h7l2 2h9v3"/></svg><h3>Files &amp; documents</h3><p>Browse local folders and view documents inside the workspace, with the assistant available beside the active file.</p></article>
+          <article class="feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10M7.5 4.5l9 5"/></svg><h3>CAD previews</h3><p>Inspect 3D models in the workspace. The STL view brings together model information, shading options and orientation controls.</p></article>
+          <article class="feature"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="m6 9 4 3-4 3M13 16h5"/></svg><h3>An integrated terminal</h3><p>Access PowerShell, Command Prompt and Antigravity from the terminal panel while keeping the workspace in view.</p></article>
+          <article class="feature"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a3 3 0 0 1-3 3H9l-5 4v-4H3V3h18zM7 8h10M7 12h7"/></svg><h3>An assistant that can act</h3><p>Antigravity can create and edit local files and run commands on the computer. Requests can also open desktop widgets, such as the radio player shown above.</p></article>
+        </div>
+        <div class="ownership"><h3>What I built</h3><p>My work focuses on the custom interface and how the desktop tools fit together. Google Antigravity supplies the AI and the ability to act on the computer. JARVIS brings these capabilities into a custom desktop workspace through PowerShell.</p></div>
+      </div>
+    </section>
+
+    <section id="setup" class="section setup-section" aria-labelledby="setup-title">
+      <div class="wrap">
+        <div class="section-head"><div><p class="eyebrow">02 / Getting started</p><h2 id="setup-title">Make it your workspace.</h2></div><p>Install the desktop application, then sign in to Antigravity through PowerShell to connect the AI assistant.</p></div>
+        <div class="setup-layout">
+          <aside class="setup-aside" aria-labelledby="requirements-title">
+            <h3 id="requirements-title">Before you begin</h3>
+            <ul class="requirements"><li>A Windows computer</li><li>Antigravity CLI and an eligible account</li><li>Internet access for AI services</li></ul>
+            <a class="button" href="assets/JARVIS_Installation_Package.zip" download>Download JARVIS <span aria-hidden="true">↓</span></a>
+            <p class="download-meta">Windows installation package · ZIP</p>
+            <p class="computer-access-note"><strong>Connected to your computer</strong>The assistant can create or change local files and run commands. Review the folders and permissions you give it before starting.</p>
+            <a class="text-link" href="https://antigravity.google/docs/cli/install/" target="_blank" rel="noopener noreferrer">Antigravity installation docs <span aria-hidden="true">↗</span></a>
+          </aside>
+          <ol class="step-list">
+            <li class="step"><div><h3>Extract the package</h3><p>Right-click <code>JARVIS_Installation_Package.zip</code> and choose <strong>Extract All</strong>. Open the extracted folder before running the installer.</p></div></li>
+            <li class="step"><div><h3>Run the installer</h3><p>Open <code>Install-JARVIS.bat</code> and follow its prompts for prerequisites and application setup. Printer configuration is optional.</p></div></li>
+            <li class="step"><div><h3>Sign in to Antigravity</h3><p>Open a new PowerShell window, enter the command below and press Enter. Complete sign-in if prompted; an existing authenticated session may be reused.</p>
+              <div class="command"><code><span aria-hidden="true">PS &gt;</span><span id="launch-command" style="color:inherit;margin:0">agy</span></code><button class="copy-button" id="copy-command" type="button" aria-label="Copy agy command">Copy</button></div>
+              <div class="copy-status" id="copy-status" role="status" aria-live="polite"></div>
+              <p>If <code>agy</code> is not recognised, check the CLI installation and reopen PowerShell to refresh its environment.</p>
+              <a class="source-link" href="https://antigravity.google/docs/cli/install/" target="_blank" rel="noopener noreferrer">Official installation and sign-in instructions <span aria-hidden="true">↗</span></a>
+            </div></li>
+            <li class="step"><div><h3>Open JARVIS</h3><p>Launch JARVIS using the shortcut created by the installer. Allow its local service to start before using the desktop interface.</p></div></li>
+            <li class="step"><div><h3>Configure printers <span class="optional-tag">Optional</span></h3><p>If your package includes printer integration, run <code>Configure-Printers.bat</code> and follow the prompts for your device. You can revisit the configuration later.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="section" aria-labelledby="support-title">
+      <div class="wrap support-layout">
+        <div class="support-heading"><p class="eyebrow">03 / Troubleshooting</p><h2 id="support-title">Need a hand?</h2><p>Start with these checks if the application does not open as expected.</p></div>
+        <div class="support-list">
+          <details><summary>PowerShell does not recognise “agy”</summary><p>Close and reopen PowerShell after installing Antigravity. If it still fails, follow the <a href="https://antigravity.google/docs/cli/install/" target="_blank" rel="noopener noreferrer">official CLI installation instructions</a> and confirm the command works there before launching JARVIS.</p></details>
+          <details><summary>The interface shows “connection refused”</summary><p>The local application service may not have started. If included in your package, run <code>Debug-JARVIS.bat</code> from the installation folder and inspect the error shown. This is more useful than repeatedly refreshing the page.</p></details>
+          <details><summary>The interface opens, but the AI does not respond</summary><p>Run <code>agy</code> directly in PowerShell to check sign-in, account access, available usage credits and connectivity. Once it works there, restart JARVIS and try again.</p></details>
+          <details><summary>How do I change my printer configuration?</summary><p>For packages with printer integration, use <code>Configure-Printers.bat</code>. If provided, <code>Test-JARVIS.bat</code> can help check the runtime and connected devices.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><div><strong>JARVIS / Mohamad Asyraf</strong><p>A personal interface project built around Google Antigravity.</p></div><a href="index.html#portfolio">Back to portfolio <span aria-hidden="true">↗</span></a></div></footer>
+  <dialog class="screenshot-dialog" id="screenshot-dialog" aria-labelledby="screenshot-dialog-title">
+    <div class="dialog-header"><h2 id="screenshot-dialog-title">JARVIS application screenshot</h2><button class="dialog-close" id="close-screenshot" type="button" aria-label="Close screenshot" autofocus>×</button></div>
+    <img id="screenshot-detail" alt="">
+  </dialog>
+  <script>
+    (() => {
+      const controls = document.getElementById('gallery-controls');
+      const buttons = Array.from(controls.querySelectorAll('button'));
+      const panels = Array.from(document.querySelectorAll('.gallery-panel'));
+      function selectView(selected) {
+        const target = selected.getAttribute('aria-controls');
+        buttons.forEach(button => button.setAttribute('aria-pressed', String(button === selected)));
+        panels.forEach(panel => { panel.hidden = panel.id !== target; });
+      }
+      buttons.forEach(button => button.addEventListener('click', () => selectView(button)));
+      selectView(buttons[0]);
+      controls.hidden = false;
+
+      const dialog = document.getElementById('screenshot-dialog');
+      const detail = document.getElementById('screenshot-detail');
+      if (typeof dialog.showModal === 'function') {
+        document.querySelectorAll('.screenshot-link, .screenshot-caption a').forEach(link => {
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            const source = link.closest('.gallery-panel').querySelector('img');
+            detail.src = source.currentSrc || source.src;
+            detail.alt = source.alt;
+            dialog.showModal();
+            document.body.classList.add('lightbox-open');
+          });
+        });
+        document.getElementById('close-screenshot').addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+        dialog.addEventListener('close', () => {
+          document.body.classList.remove('lightbox-open');
+          detail.removeAttribute('src');
+        });
+      }
+
+      const copyButton = document.getElementById('copy-command');
+      const copyStatus = document.getElementById('copy-status');
+      let copyTimer;
+      copyButton.addEventListener('click', async () => {
+        clearTimeout(copyTimer);
+        try {
+          if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard unavailable');
+          await navigator.clipboard.writeText('agy');
+          copyButton.textContent = 'Copied';
+          copyStatus.textContent = 'Command copied. Paste it into PowerShell.';
+          copyTimer = setTimeout(() => { copyButton.textContent = 'Copy'; copyStatus.textContent = ''; }, 3500);
+        } catch (_) {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(document.getElementById('launch-command'));
+          if (selection) { selection.removeAllRanges(); selection.addRange(range); }
+          copyButton.textContent = 'Copy';
+          copyStatus.textContent = 'Select agy above and copy it manually.';
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
