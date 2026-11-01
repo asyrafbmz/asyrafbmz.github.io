@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10273d">
+  <meta name="description" content="Pi AutoPrint is a personal Raspberry Pi automation project that generates scheduled printer reports using weather forecasts, Pi-hole activity and read-only Google Sheets data.">
+  <title>Pi AutoPrint | Personal Raspberry Pi Reporting</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="canonical" href="https://asyrafbmz.github.io/pi-autoprint/">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="top-rule" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./" aria-label="Pi AutoPrint homepage"><span class="brand-icon" aria-hidden="true">PI</span><span>Pi AutoPrint<small>Personal automation project</small></span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="./" aria-current="page">Overview</a><a href="./privacy.html">Privacy</a><a href="./terms.html">Terms</a><a class="portfolio-link" href="../">Main portfolio</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-layout">
+        <div>
+          <span class="eyebrow">Local automation / print reporting</span>
+          <h1>Useful data.<br>One printed report.</h1>
+          <p><strong>Pi AutoPrint</strong> is a personal Raspberry Pi project that creates scheduled, two-page printer documents: an existing printer test sheet followed by a compact report with weather, network activity and motorcycle maintenance information.</p>
+          <div class="hero-actions"><a class="btn" href="#how-it-works">How it works &nbsp; &#8594;</a><a class="text-action" href="./privacy.html">Read the privacy policy &nbsp; &#8594;</a></div>
+          <div class="privacy-note"><span class="dot" aria-hidden="true"></span><span>Runs on a privately managed Raspberry Pi. Not a public sign-in service.</span></div>
+        </div>
+        <div class="report-preview" role="img" aria-label="Illustrative print layout with weather, network and motorcycle sections. No personal data is shown.">
+          <div class="report-preview-head"><div><strong>Personal System Report</strong><small>A4 / page two / illustrative layout</small></div><span class="paper-icon" aria-hidden="true"></span></div>
+          <div class="report-line"><div><strong>01 / Local weather</strong><br><span>Today's conditions and seven dated forecast days</span></div><div class="mini-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="report-line"><div><strong>02 / Network activity</strong><br><span>DNS queries, blocked requests and status</span></div><strong aria-hidden="true">DNS</strong></div>
+          <div class="report-line"><div><strong>03 / Motorcycle overview</strong><br><span>Running costs, servicing and renewal dates</span></div><strong aria-hidden="true">PDF</strong></div>
+          <footer aria-hidden="true"><span></span><span></span><span></span><span></span></footer>
+        </div>
+      </div>
+    </section>
+    <section class="section section-soft" id="features">
+      <div class="container">
+        <div class="section-intro"><span class="eyebrow">What's in the report</span><h2>Three data sources. One clear page.</h2><p>Each report is built shortly before a scheduled print, using information needed for a personal household and motorcycle overview.</p></div>
+        <div class="three-cards">
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17h15a3 3 0 0 0 0-6h-2a5 5 0 0 0-9-2 4 4 0 0 0-4 8z"/><path d="M4 6l-2-2M7 3V1"/></svg></div><h3>Weather outlook</h3><p>Current local conditions and seven consecutive dated forecast days, including temperatures, forecast descriptions and rain probability.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Pi-hole activity</h3><p>Local DNS request totals, blocking statistics and operational health, with the measurement period stated clearly.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16M15 15h3"/></svg></div><h3>Motorcycle records</h3><p>Selected fuel and maintenance costs, mileage, servicing thresholds, and upcoming renewal dates from a designated Google spreadsheet.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="split"><div><span class="eyebrow">The workflow</span><h2>Built for a scheduled print, not a public dashboard.</h2><p>The project uses Python on a Raspberry Pi, a local Pi-hole installation and a connected printer. Its website is only an informational page; it does not display live data or accept Google logins.</p></div>
+        <dl class="fact-list"><div class="fact-item"><dt>Schedule</dt><dd>1st, 11th and 21st of each month at 6:00 AM Singapore time.</dd></div><div class="fact-item"><dt>Output</dt><dd>Two A4 pages within one printer job: unchanged test page, then the generated information report.</dd></div><div class="fact-item"><dt>Google access</dt><dd>Read-only Google Sheets OAuth scope, used for the designated motorcycle reporting spreadsheet.</dd></div><div class="fact-item"><dt>Storage</dt><dd>Local report PDFs and operational logs may be retained on the Raspberry Pi according to its configuration.</dd></div></dl></div>
+        <div class="pipeline" aria-label="Data workflow"><div class="pipeline-step">Collect information<small>Weather API, local Pi-hole, Google Sheets</small></div><span class="pipeline-arrow" aria-hidden="true">&#8594;</span><div class="pipeline-step">Generate PDF<small>Printer test page + one-page summary</small></div><span class="pipeline-arrow" aria-hidden="true">&#8594;</span><div class="pipeline-step">Print and archive<small>One local CUPS job and optional saved copy</small></div></div>
+      </div>
+    </section>
+    <section class="section section-soft" id="data-and-privacy">
+      <div class="container split"><div><span class="eyebrow">Privacy by design</span><h2>Public explanation. Private records.</h2><p>The purpose of this site is to transparently explain the personal automation and its Google Sheets authorisation, not to expose its reports or the underlying spreadsheet.</p><p><a class="text-action" href="./privacy.html">See the full privacy policy &#8594;</a></p></div><div><div class="callout"><p><strong>About the Google permission.</strong> The OAuth scope <code>spreadsheets.readonly</code> grants read access to spreadsheets available to the authorising Google account. Pi AutoPrint is configured to request values needed from the designated reporting spreadsheet only. It cannot edit Google Sheets through this scope.</p></div><p>No public Google sign-in, spreadsheet viewer or account management feature is implemented on these pages. The private Raspberry Pi runs the actual automation.</p></div></div>
+    </section>
+    <section class="cta"><div class="container"><span class="eyebrow" style="color:#82d8ef">Project information</span><h2>Questions about Pi AutoPrint?</h2><p>Pi AutoPrint is maintained as a personal engineering project by Mohamad Asyraf Bin Mohamad Zailani. For questions about this project's handling of Google data, consult its privacy policy or contact the developer.</p><a class="btn" href="mailto:mohdasyraf999@gmail.com?subject=Pi%20AutoPrint%20Enquiry">Email the developer &#8594;</a></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-row"><div><strong>Pi AutoPrint</strong><p>Personal Raspberry Pi automation / Mohamad Asyraf</p></div><nav class="footer-links" aria-label="Footer"><a href="./">Overview</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">Terms of use</a><a href="../">Portfolio</a></nav></div></footer>
+</body>
+</html>
